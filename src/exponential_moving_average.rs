@@ -1,9 +1,3 @@
-/**
- ** Exponential Moving average
- *
- * Similar to a simple average, but weights the recent prices more heavily
- */
-
 pub fn exponential_moving_average(spread: &[f32], period: usize) -> f32 {
     if spread.len() < period {
         panic!("Period For The EMA Is Out Of Bounds")

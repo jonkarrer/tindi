@@ -1,9 +1,3 @@
-/**
- ** Channel Breakout
- *
- *  Support and resistance lines are drawn at the high and low of the historic price
- *  .. and a recent high above or low below is a channel breakout
- */
 use super::Trend;
 
 pub fn has_channel_breakout(prices: &[f32], window: usize, target_trend: &Trend) -> bool {

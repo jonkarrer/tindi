@@ -1,8 +1,3 @@
-/**
- ** Bollinger Bands
- *
- * The upper deviation (upper band), lower deviations (lower band), and mean deviations (middle band)
- */
 use super::{simple_moving_average, standard_deviation};
 
 #[derive(Debug, PartialEq)]

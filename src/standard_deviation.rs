@@ -1,9 +1,3 @@
-/**
- ** Standard Deviation
- *
- * The average plus and average minus (deviations) of prices over a period
- */
-
 pub fn standard_deviation(prices: &[f32]) -> f32 {
     let length = prices.len() as f32;
     let mean = prices.iter().sum::<f32>() / length;

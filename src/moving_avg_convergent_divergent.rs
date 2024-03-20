@@ -1,8 +1,3 @@
-/**
- ** Moving Average Convergence Divergence
- *
- * A momentum indicator that uses the exponential moving averages
- */
 use crate::exponential_moving_average;
 
 #[derive(Debug, PartialEq)]
