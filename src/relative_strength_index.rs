@@ -1,14 +1,9 @@
-/**
- ** Relative Strenght index
- *
- * Tracks the buying and selling strength of a stock. Under 30 is considered over-sold, over 80 is over-bought
- */
 use crate::simple_moving_average;
 
-pub fn relative_strength_index(prices: &[f32]) -> f32 {
+pub fn relative_strength_index(prices: &[f32]) -> Option<Vec<f32>> {
     let period = 14;
     if prices.len() < period {
-        panic!("Spread Must Be A Length Of At Least 14")
+        return None;
     }
 
     // Calculate gains and losses
@@ -35,7 +30,7 @@ pub fn relative_strength_index(prices: &[f32]) -> f32 {
         rsi_line.push(rsi);
     }
 
-    *rsi_line.last().unwrap()
+    Some(rsi_line)
 }
 
 #[cfg(test)]
@@ -52,17 +47,18 @@ mod tests {
         let result = relative_strength_index(&data);
         dbg!(&result);
         let expect = 35.794403;
+        let last = result.unwrap();
 
-        assert_eq!(result, expect);
+        assert_eq!(last[last.len() - 1], expect);
     }
 
     #[test]
-    #[should_panic(expected = "Spread Must Be A Length Of At Least 14")]
     fn test_rsi_error() {
         let data: Vec<f32> = vec![
             35.56, 34.96, 33.72, 32.89, 34.36, 30.36, 30.89, 31.01, 32.19, 34.19, 30.0, 30.0,
         ];
 
-        relative_strength_index(&data);
+        let rsi = relative_strength_index(&data);
+        assert!(rsi.is_none())
     }
 }
