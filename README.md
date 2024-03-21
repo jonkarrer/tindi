@@ -1,29 +1,6 @@
-# Alpaca API Client in Rust
-
-![Build Status](https://img.shields.io/badge/build-passing-green.svg)
-![Version 0.1.0](https://img.shields.io/badge/version-0.1.6-blue.svg)
-
-## Table of Contents
-
-- [Introduction](#introduction)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Testing](#testing)
-- [Contribution](#contribution)
-- [License](#license)
-
-## Introduction
+# Tindi
 
 A library of easy to use technical stock chart indicators.
-
-Work in progress, so use with caution. Still needs to be tested properly and subject to change.
-
-## Features
-
-- **Feature 1:** Safe and single threaded
-- **Feature 2:** Easy to use
-- **Feature 3:** Minimal overhead
 
 ## Installation
 
@@ -37,7 +14,7 @@ cargo install tindi
 
 ## Usage
 
-[RS Docs](https://docs.rs/alpaca_api_client/0.1.0/tindi/)
+[RS Docs](https://docs.rs/alpaca_api_client/0.2.0/tindi/)
 
 ## Contribution
 
