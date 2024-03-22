@@ -1,11 +1,11 @@
-pub fn simple_moving_average(prices: &[f32]) -> f32 {
+pub fn simple_moving_average(data: &[f32]) -> f32 {
     let mut sum = 0.0;
 
-    for number in prices {
+    for number in data {
         sum += number
     }
 
-    sum / prices.len() as f32
+    sum / data.len() as f32
 }
 
 #[cfg(test)]

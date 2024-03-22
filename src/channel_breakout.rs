@@ -1,15 +1,15 @@
 use super::Trend;
 
-pub fn has_channel_breakout(prices: &[f32], window: usize, target_trend: &Trend) -> bool {
-    if prices.len() < window {
-        panic!("Window is Larger Than Prices Length")
+pub fn has_channel_breakout(data: &[f32], window: usize, target_trend: &Trend) -> bool {
+    if data.len() < window {
+        panic!("Window is Larger Than data Length")
     }
 
     let mut high_line_price = 0.0;
     let mut low_line_price = 0.0;
 
-    let past_prices = &prices[..prices.len() - window];
-    for &price in past_prices {
+    let past_data = &data[..data.len() - window];
+    for &price in past_data {
         if price > high_line_price {
             high_line_price = price
         }
@@ -21,8 +21,8 @@ pub fn has_channel_breakout(prices: &[f32], window: usize, target_trend: &Trend)
     let mut window_high_price = 0.0;
     let mut window_low_price = 0.0;
 
-    let recent_prices = &prices[prices.len() - window..];
-    for &price in recent_prices {
+    let recent_data = &data[data.len() - window..];
+    for &price in recent_data {
         if price > window_high_price {
             window_high_price = price
         }

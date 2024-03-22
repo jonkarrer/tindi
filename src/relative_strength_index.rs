@@ -1,16 +1,20 @@
-use crate::simple_moving_average;
+use crate::{simple_moving_average, TindiError};
 
-pub fn relative_strength_index(prices: &[f32]) -> Option<Vec<f32>> {
+pub fn relative_strength_index(data: &[f32]) -> Result<Vec<f32>, TindiError> {
     let period = 14;
-    if prices.len() < period {
-        return None;
+    if data.len() < period {
+        return Err(TindiError::NotEnoughData(format!(
+            "RSI: Given {}, Need {}",
+            data.len(),
+            period,
+        )));
     }
 
     // Calculate gains and losses
     let mut gains = Vec::new();
     let mut losses = Vec::new();
-    for i in 0..prices.len() - 1 {
-        let diff = &prices[i + 1] - &prices[i];
+    for i in 0..data.len() - 1 {
+        let diff = &data[i + 1] - &data[i];
         if diff > 0.0 {
             gains.push(diff);
             losses.push(0.0);
@@ -22,7 +26,7 @@ pub fn relative_strength_index(prices: &[f32]) -> Option<Vec<f32>> {
 
     // Caclulate rsi
     let mut rsi_line = Vec::new();
-    let iterations = prices.len() - period;
+    let iterations = data.len() - period;
     for i in 0..iterations {
         let avg_gain = simple_moving_average(&gains[i..14 + i]);
         let avg_loss = simple_moving_average(&losses[i..14 + i]);
@@ -30,7 +34,7 @@ pub fn relative_strength_index(prices: &[f32]) -> Option<Vec<f32>> {
         rsi_line.push(rsi);
     }
 
-    Some(rsi_line)
+    Ok(rsi_line)
 }
 
 #[cfg(test)]
@@ -59,6 +63,6 @@ mod tests {
         ];
 
         let rsi = relative_strength_index(&data);
-        assert!(rsi.is_none())
+        assert!(rsi.is_err())
     }
 }

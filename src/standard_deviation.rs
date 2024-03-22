@@ -1,11 +1,7 @@
-pub fn standard_deviation(prices: &[f32]) -> f32 {
-    let length = prices.len() as f32;
-    let mean = prices.iter().sum::<f32>() / length;
-    let variance = prices
-        .iter()
-        .map(|value| (value - mean).powi(2))
-        .sum::<f32>()
-        / (length - 1.0);
+pub fn standard_deviation(data: &[f32]) -> f32 {
+    let length = data.len() as f32;
+    let mean = data.iter().sum::<f32>() / length;
+    let variance = data.iter().map(|value| (value - mean).powi(2)).sum::<f32>() / (length - 1.0);
     variance.sqrt()
 }
 

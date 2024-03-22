@@ -8,7 +8,7 @@ pub struct Breaker {
     timestamp: String,
 }
 
-pub fn find_breakers(prices: &[f32]) {
+pub fn find_breakers(data: &[f32]) {
     let mut higher_highs: Vec<&f32> = Vec::new();
     let mut higher_lows: Vec<f32> = Vec::new();
     let mut lower_lows: Vec<&f32> = Vec::new();
@@ -21,13 +21,13 @@ pub fn find_breakers(prices: &[f32]) {
     let mut higher_low_anchor = 0.0;
     let mut lower_high_anchor = 0.0;
     loop {
-        if i == prices.len() {
+        if i == data.len() {
             break;
         }
 
         //TODO Need to use high and low depending on trend
-        let prev_price = &prices[i - 1];
-        let curr_price = &prices[i];
+        let prev_price = &data[i - 1];
+        let curr_price = &data[i];
 
         // Seed initial values
         if curr_price > prev_price {

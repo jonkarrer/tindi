@@ -8,8 +8,8 @@ pub struct BollingerBands {
 }
 
 impl BollingerBands {
-    pub fn new(spread: &[f32]) -> Self {
-        if spread.len() < 4 {
+    pub fn new(data: &[f32]) -> Self {
+        if data.len() < 4 {
             panic!("Not Enough Data Points For Bollinger Bands")
         }
         let mut top = 0.0;
@@ -17,12 +17,12 @@ impl BollingerBands {
         let mut bottom = 0.0;
 
         // * Period has to be half the amount of data points.
-        let period: usize = spread.len() / 2;
+        let period: usize = data.len() / 2;
 
-        for i in period..spread.len() {
+        for i in period..data.len() {
             // * Progressivly "climb up" the arrray one value at a time
             let offset = &i - &period;
-            let prices = &spread[offset..spread.len()];
+            let prices = &data[offset..data.len()];
             let mean = simple_moving_average(&prices);
             let std_dev = standard_deviation(&prices);
 
@@ -32,7 +32,7 @@ impl BollingerBands {
             let bottom_plot = mean - k;
 
             // * When the last number is hit, set the values
-            if spread.len() - &i == 1 {
+            if data.len() - &i == 1 {
                 top = upper_plot;
                 mid = mean;
                 bottom = bottom_plot;

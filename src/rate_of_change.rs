@@ -1,11 +1,18 @@
-pub fn rate_of_change(prices: &[f32], periods: usize) -> Option<f32> {
-    if prices.len() < periods {
-        return None;
-    }
-    let price_n_periods_ago = prices[prices.len() - periods];
-    let price_now = prices[prices.len() - 1];
+use crate::TindiError;
 
-    Some(((price_now - price_n_periods_ago) / price_n_periods_ago) * 100.0)
+pub fn rate_of_change(data: &[f32], period: usize) -> Result<f32, TindiError> {
+    if data.len() < period {
+        return Err(TindiError::OutOfRange(format!(
+            "ROC: Given {}, Need {}",
+            data.len(),
+            period,
+        )));
+    }
+
+    let price_n_periods_ago = data[data.len() - period];
+    let price_now = data[data.len() - 1];
+
+    Ok(((price_now - price_n_periods_ago) / price_n_periods_ago) * 100.0)
 }
 
 #[cfg(test)]
