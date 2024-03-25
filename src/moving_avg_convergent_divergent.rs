@@ -1,6 +1,7 @@
 use crate::{exponential_moving_average, TindiError};
+use serde::{Deserialize, Serialize};
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct MovingAverageConvergenceDivergence {
     pub baseline: Vec<f32>,
     pub signal: f32,

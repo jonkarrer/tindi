@@ -1,8 +1,10 @@
+use serde::{Deserialize, Serialize};
+
 use crate::TindiError;
 
 use super::{simple_moving_average, standard_deviation};
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
 pub struct BollingerBands {
     pub top: f32,
     pub mid: f32,

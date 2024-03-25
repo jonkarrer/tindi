@@ -10,3 +10,6 @@ readme = "README.md"
 keywords = ["stocks", "trading", "indicators",]
 categories = ["finance"]
 
+[dependencies]
+serde = { version = "1.0.197", features = ["derive"] }
+
