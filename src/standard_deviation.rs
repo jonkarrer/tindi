@@ -1,5 +1,10 @@
 pub fn standard_deviation(data: &[f32]) -> f32 {
     let length = data.len() as f32;
+
+    if length < 1.0 {
+        return 0.0;
+    }
+
     let mean = data.iter().sum::<f32>() / length;
     let variance = data.iter().map(|value| (value - mean).powi(2)).sum::<f32>() / (length - 1.0);
     variance.sqrt()

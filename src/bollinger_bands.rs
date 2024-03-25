@@ -1,3 +1,5 @@
+use crate::TindiError;
+
 use super::{simple_moving_average, standard_deviation};
 
 #[derive(Debug, PartialEq)]
@@ -8,9 +10,13 @@ pub struct BollingerBands {
 }
 
 impl BollingerBands {
-    pub fn new(data: &[f32]) -> Self {
+    pub fn new(data: &[f32]) -> Result<Self, TindiError> {
         if data.len() < 4 {
-            panic!("Not Enough Data Points For Bollinger Bands")
+            return Err(TindiError::NotEnoughData(format!(
+                "Bollinger: Given {}, Need {}",
+                data.len(),
+                4,
+            )));
         }
         let mut top = 0.0;
         let mut mid = 0.0;
@@ -20,7 +26,7 @@ impl BollingerBands {
         let period: usize = data.len() / 2;
 
         for i in period..data.len() {
-            // * Progressivly "climb up" the arrray one value at a time
+            // * Progressivly "climb up" the array one value at a time
             let offset = &i - &period;
             let prices = &data[offset..data.len()];
             let mean = simple_moving_average(&prices);
@@ -38,7 +44,7 @@ impl BollingerBands {
                 bottom = bottom_plot;
             }
         }
-        Self { top, mid, bottom }
+        Ok(Self { top, mid, bottom })
     }
 }
 
@@ -55,7 +61,7 @@ mod tests {
             33.91, 35.87, 35.37, 36.11, 35.93, 34.53, 33.70, 33.95, 34.20, 35.38, 36.12, 35.35,
             36.25, 36.59, 36.49, 36.39, 35.66, 35.99, 32.93, 30.98, 30.99, 32.15, 31.99, 32.34,
         ];
-        let result = BollingerBands::new(&data);
+        let result = BollingerBands::new(&data).unwrap();
         dbg!(&result);
         let expect = BollingerBands {
             top: 38.164547,
@@ -67,10 +73,10 @@ mod tests {
     }
 
     #[test]
-    #[should_panic(expected = "Not Enough Data Points For Bollinger Bands")]
     fn test_ema_error() {
         let data: Vec<f32> = vec![10.0, 12.0, 13.0];
 
-        BollingerBands::new(&data);
+        let result = BollingerBands::new(&data);
+        assert!(result.is_err())
     }
 }

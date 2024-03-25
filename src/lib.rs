@@ -19,9 +19,6 @@ pub use bollinger_bands::BollingerBands;
 mod trend;
 pub use trend::*;
 
-mod break_of_structure;
-pub use break_of_structure::*;
-
 mod rate_of_change;
 pub use rate_of_change::*;
 

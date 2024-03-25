@@ -1,5 +1,10 @@
 pub fn simple_moving_average(data: &[f32]) -> f32 {
     let mut sum = 0.0;
+    let length = data.len();
+
+    if length < 1 {
+        return 0.0;
+    }
 
     for number in data {
         sum += number

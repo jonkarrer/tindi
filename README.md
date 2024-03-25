@@ -1,6 +1,6 @@
 # Tindi
 
-A library of easy to use technical stock chart indicators.
+A zero dependency library of easy to use technical stock chart indicators.
 
 ## Installation
 
