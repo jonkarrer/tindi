@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.2] - 2024-03-26
+
+### 🚜 Refactor
+
+- Simplify bollinger bands
+
+### ⚙️ Miscellaneous Tasks
+
+- Bump version
+
 ## [0.5.1] - 2024-03-26
 
 ### 🚜 Refactor
