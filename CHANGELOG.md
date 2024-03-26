@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.0] - 2024-03-26
+
+### 🚜 Refactor
+
+- Simplify rsi method
+
+### ⚙️ Miscellaneous Tasks
+
+- Bump version
+
+### Change
+
+- TindiError -> MathError
+
 ## [0.4.1] - 2024-03-25
 
 ### Add
