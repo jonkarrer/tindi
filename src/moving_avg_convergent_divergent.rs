@@ -1,4 +1,4 @@
-use crate::{exponential_moving_average, TindiError};
+use crate::{exponential_moving_average, MathError};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
@@ -9,10 +9,10 @@ pub struct MovingAverageConvergenceDivergence {
 }
 
 impl MovingAverageConvergenceDivergence {
-    pub fn new(data: &[f32]) -> Result<Self, TindiError> {
+    pub fn new(data: &[f32]) -> Result<Self, MathError> {
         let data_len_needed = 26 + 9;
         if data.len() < data_len_needed {
-            return Err(TindiError::OutOfRange(format!(
+            return Err(MathError::NotEnoughData(format!(
                 "MACD: Given {}, Need {}",
                 data.len(),
                 data_len_needed,

@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::TindiError;
+use crate::MathError;
 pub use crate::{exponential_moving_average, simple_moving_average};
 
 #[derive(Debug, PartialEq, Clone, Serialize, Deserialize)]
@@ -13,9 +13,9 @@ pub fn simple_moving_average_trend(
     data: &[f32],
     short_period: usize,
     long_period: usize,
-) -> Result<Trend, TindiError> {
+) -> Result<Trend, MathError> {
     if data.len() < long_period {
-        return Err(TindiError::OutOfRange(format!(
+        return Err(MathError::OutOfRange(format!(
             "SMA Trend: Given {}, Need {}",
             data.len(),
             long_period,
@@ -36,9 +36,9 @@ pub fn exponential_moving_average_trend(
     data: &[f32],
     short_period: usize,
     long_period: usize,
-) -> Result<Trend, TindiError> {
+) -> Result<Trend, MathError> {
     if data.len() < (long_period * 2) {
-        return Err(TindiError::OutOfRange(format!(
+        return Err(MathError::OutOfRange(format!(
             "SMA Trend: Given {}, Need {}",
             data.len(),
             long_period,

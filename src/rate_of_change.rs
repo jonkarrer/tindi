@@ -1,8 +1,8 @@
-use crate::TindiError;
+use crate::MathError;
 
-pub fn rate_of_change(data: &[f32], period: usize) -> Result<f32, TindiError> {
+pub fn rate_of_change(data: &[f32], period: usize) -> Result<f32, MathError> {
     if data.len() < period {
-        return Err(TindiError::OutOfRange(format!(
+        return Err(MathError::OutOfRange(format!(
             "ROC: Given {}, Need {}",
             data.len(),
             period,

@@ -1,13 +1,13 @@
 use super::Trend;
-use crate::TindiError;
+use crate::MathError;
 
 pub fn has_channel_breakout(
     data: &[f32],
     window: usize,
     target_trend: &Trend,
-) -> Result<bool, TindiError> {
+) -> Result<bool, MathError> {
     if data.len() < window {
-        return Err(TindiError::OutOfRange(format!(
+        return Err(MathError::OutOfRange(format!(
             "ChannelBreakout: Given {}, Need {}",
             data.len(),
             window,

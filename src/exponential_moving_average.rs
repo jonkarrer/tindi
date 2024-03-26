@@ -1,8 +1,8 @@
-use crate::TindiError;
+use crate::MathError;
 
-pub fn exponential_moving_average(data: &[f32], period: usize) -> Result<f32, TindiError> {
+pub fn exponential_moving_average(data: &[f32], period: usize) -> Result<f32, MathError> {
     if data.len() < period {
-        return Err(TindiError::OutOfRange(format!(
+        return Err(MathError::OutOfRange(format!(
             "EMA: Given {}, Need {}",
             data.len(),
             period,

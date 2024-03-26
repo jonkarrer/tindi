@@ -1,6 +1,6 @@
-use crate::{simple_moving_average, TindiError};
+use crate::{simple_moving_average, MathError};
 
-pub fn relative_strength_index(data: &[f32]) -> Result<f32, TindiError> {
+pub fn relative_strength_index(data: &[f32]) -> Result<f32, MathError> {
     // Calculate gains and losses
     let mut gains = Vec::new();
     let mut losses = Vec::new();
@@ -18,9 +18,12 @@ pub fn relative_strength_index(data: &[f32]) -> Result<f32, TindiError> {
     // Calculate rsi
     let avg_gain = simple_moving_average(&gains);
     let avg_loss = simple_moving_average(&losses);
-    let rsi = 100.0 - (100.0 / (1.0 + (avg_gain / avg_loss)));
 
-    Ok(rsi)
+    if avg_loss == 0.0 {
+        return Ok(100.0 - (100.0 / (1.0 + avg_gain)));
+    }
+
+    Ok(100.0 - (100.0 / (1.0 + (avg_gain / avg_loss))))
 }
 
 #[cfg(test)]

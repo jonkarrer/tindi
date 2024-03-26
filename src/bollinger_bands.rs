@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::TindiError;
+use crate::MathError;
 
 use super::{simple_moving_average, standard_deviation};
 
@@ -12,12 +12,11 @@ pub struct BollingerBands {
 }
 
 impl BollingerBands {
-    pub fn new(data: &[f32]) -> Result<Self, TindiError> {
+    pub fn new(data: &[f32]) -> Result<Self, MathError> {
         if data.len() < 4 {
-            return Err(TindiError::NotEnoughData(format!(
-                "Bollinger: Given {}, Need {}",
+            return Err(MathError::NotEnoughData(format!(
+                "Bollinger: Given {}, Need at least 2 items",
                 data.len(),
-                4,
             )));
         }
         let mut top = 0.0;
