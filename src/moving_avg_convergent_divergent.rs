@@ -1,4 +1,6 @@
-use crate::{exponential_moving_average, MathError};
+use std::io::{Error, ErrorKind};
+
+use crate::exponential_moving_average;
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
@@ -9,14 +11,13 @@ pub struct MovingAverageConvergenceDivergence {
 }
 
 impl MovingAverageConvergenceDivergence {
-    pub fn new(data: &[f32]) -> Result<Self, MathError> {
+    pub fn new(data: &[f32]) -> Result<Self, Error> {
         let data_len_needed = 26 + 9;
         if data.len() < data_len_needed {
-            return Err(MathError::NotEnoughData(format!(
-                "MACD: Given {}, Need {}",
-                data.len(),
-                data_len_needed,
-            )));
+            return Err(Error::new(
+                ErrorKind::Other,
+                format!("MACD: Given {}, Need {}", data.len(), data_len_needed,),
+            ));
         }
 
         let mut baseline = Vec::new();

@@ -1,6 +1,6 @@
-use crate::{simple_moving_average, MathError};
+use crate::simple_moving_average;
 
-pub fn relative_strength_index(data: &[f32]) -> Result<f32, MathError> {
+pub fn relative_strength_index(data: &[f32]) -> f32 {
     // Calculate gains and losses
     let mut gains = Vec::new();
     let mut losses = Vec::new();
@@ -20,10 +20,10 @@ pub fn relative_strength_index(data: &[f32]) -> Result<f32, MathError> {
     let avg_loss = simple_moving_average(&losses);
 
     if avg_loss == 0.0 {
-        return Ok(100.0 - (100.0 / (1.0 + avg_gain)));
+        return 100.0 - (100.0 / (1.0 + avg_gain));
     }
 
-    Ok(100.0 - (100.0 / (1.0 + (avg_gain / avg_loss))))
+    100.0 - (100.0 / (1.0 + (avg_gain / avg_loss)))
 }
 
 #[cfg(test)]
@@ -37,7 +37,7 @@ mod tests {
             44.34, 44.09, 44.15, 43.61, 44.33, 44.83, 45.10, 45.42, 45.84, 46.08, 45.89, 46.03,
             45.61, 46.28, 46.28,
         ];
-        let result = relative_strength_index(&data).unwrap();
+        let result = relative_strength_index(&data);
         dbg!(&result);
         let expect = 70.46411;
 

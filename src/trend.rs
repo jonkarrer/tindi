@@ -1,7 +1,7 @@
-use serde::{Deserialize, Serialize};
+use std::io::{Error, ErrorKind};
 
-use crate::MathError;
 pub use crate::{exponential_moving_average, simple_moving_average};
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, PartialEq, Clone, Serialize, Deserialize)]
 pub enum Trend {
@@ -13,13 +13,12 @@ pub fn simple_moving_average_trend(
     data: &[f32],
     short_period: usize,
     long_period: usize,
-) -> Result<Trend, MathError> {
+) -> Result<Trend, Error> {
     if data.len() < long_period {
-        return Err(MathError::OutOfRange(format!(
-            "SMA Trend: Given {}, Need {}",
-            data.len(),
-            long_period,
-        )));
+        return Err(Error::new(
+            ErrorKind::Other,
+            format!("SMA Trend: Given {}, Need {}", data.len(), long_period,),
+        ));
     }
 
     let short = simple_moving_average(&data[data.len() - short_period..]);
@@ -36,13 +35,12 @@ pub fn exponential_moving_average_trend(
     data: &[f32],
     short_period: usize,
     long_period: usize,
-) -> Result<Trend, MathError> {
+) -> Result<Trend, Error> {
     if data.len() < (long_period * 2) {
-        return Err(MathError::OutOfRange(format!(
-            "SMA Trend: Given {}, Need {}",
-            data.len(),
-            long_period,
-        )));
+        return Err(Error::new(
+            ErrorKind::Other,
+            format!("SMA Trend: Given {}, Need {}", data.len(), long_period,),
+        ));
     }
 
     let short_period =

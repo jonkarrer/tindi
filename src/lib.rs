@@ -24,6 +24,3 @@ pub use rate_of_change::*;
 
 mod channel_breakout;
 pub use channel_breakout::*;
-
-mod errors;
-pub use errors::*;

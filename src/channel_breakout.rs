@@ -1,17 +1,16 @@
 use super::Trend;
-use crate::MathError;
+use std::io::{Error, ErrorKind};
 
 pub fn has_channel_breakout(
     data: &[f32],
     window: usize,
     target_trend: &Trend,
-) -> Result<bool, MathError> {
+) -> Result<bool, Error> {
     if data.len() < window {
-        return Err(MathError::OutOfRange(format!(
-            "ChannelBreakout: Given {}, Need {}",
-            data.len(),
-            window,
-        )));
+        return Err(Error::new(
+            ErrorKind::Other,
+            format!("ChannelBreakout: Given {}, Need {}", data.len(), window,),
+        ));
     }
 
     let mut high_line_price = 0.0;

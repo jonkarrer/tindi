@@ -1,6 +1,6 @@
-use serde::{Deserialize, Serialize};
+use std::io::{Error, ErrorKind};
 
-use crate::MathError;
+use serde::{Deserialize, Serialize};
 
 use super::{simple_moving_average, standard_deviation};
 
@@ -12,12 +12,12 @@ pub struct BollingerBands {
 }
 
 impl BollingerBands {
-    pub fn new(data: &[f32]) -> Result<Self, MathError> {
+    pub fn new(data: &[f32]) -> Result<Self, Error> {
         if data.len() < 4 {
-            return Err(MathError::NotEnoughData(format!(
-                "Bollinger: Given {}, Need at least 2 items",
-                data.len(),
-            )));
+            return Err(Error::new(
+                ErrorKind::Other,
+                format!("Bollinger: Given {}, Need at least 2 items", data.len()),
+            ));
         }
         let mut top = 0.0;
         let mut mid = 0.0;

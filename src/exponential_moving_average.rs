@@ -1,12 +1,11 @@
-use crate::MathError;
+use std::io::{Error, ErrorKind};
 
-pub fn exponential_moving_average(data: &[f32], period: usize) -> Result<f32, MathError> {
+pub fn exponential_moving_average(data: &[f32], period: usize) -> Result<f32, Error> {
     if data.len() < period {
-        return Err(MathError::OutOfRange(format!(
-            "EMA: Given {}, Need {}",
-            data.len(),
-            period,
-        )));
+        return Err(Error::new(
+            ErrorKind::Other,
+            format!("EMA: Given {}, Need {}", data.len(), period,),
+        ));
     }
 
     let mut ema = 0.0;

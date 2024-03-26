@@ -1,12 +1,11 @@
-use crate::MathError;
+use std::io::{Error, ErrorKind};
 
-pub fn rate_of_change(data: &[f32], period: usize) -> Result<f32, MathError> {
+pub fn rate_of_change(data: &[f32], period: usize) -> Result<f32, Error> {
     if data.len() < period {
-        return Err(MathError::OutOfRange(format!(
-            "ROC: Given {}, Need {}",
-            data.len(),
-            period,
-        )));
+        return Err(Error::new(
+            ErrorKind::Other,
+            format!("ROC: Given {}, Need {}", data.len(), period,),
+        ));
     }
 
     let price_n_periods_ago = data[data.len() - period];
