@@ -1,8 +1,6 @@
-use std::io::{Error, ErrorKind};
-
-use serde::{Deserialize, Serialize};
-
 use crate::{simple_moving_average, standard_deviation};
+use serde::{Deserialize, Serialize};
+use std::io::{Error, ErrorKind};
 
 #[derive(Serialize, Deserialize, Debug, PartialEq)]
 pub struct BollingerBands {
