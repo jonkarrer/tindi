@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.0] - 2024-05-10
+
+### 🚜 Refactor
+
+- Group modules
+
+### ⚙️ Miscellaneous Tasks
+
+- Bump version
+- Bump version
+
 ## [0.5.2] - 2024-03-26
 
 ### 🚜 Refactor
