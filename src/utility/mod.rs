@@ -41,16 +41,17 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_find_price_peaks_small() {
+    fn test_find_price_peaks_three() {
         let peaks = find_price_peaks(&[5, 6, 8, 9, 6, 8, 7, 12], 3);
         assert!(peaks.is_some_and(|x| x[0] == 9));
     }
 
     #[test]
-    fn test_find_price_peaks_large() {
-        let peaks = find_price_peaks(&[5, 6, 8, 9, 6, 8, 7, 12, 5, 8, 9, 10, 5, 0, 4, 2, 4, 5], 3);
-        dbg!(peaks);
-        assert_eq!(false, true);
-        // assert!(peaks.is_some_and(|x| x[0] == 9));
+    fn test_find_price_peaks_five() {
+        let peaks = find_price_peaks(
+            &[5, 6, 8, 9, 6, 8, 7, 12, 5, 8, 9, 10, 5, 0, 4, 2, 4, 5, 20],
+            5,
+        );
+        assert!(peaks.is_some_and(|x| x[0] == 12));
     }
 }
