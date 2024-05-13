@@ -7,5 +7,5 @@ pub use momentum::*;
 mod trend;
 pub use trend::*;
 
-mod utility;
-pub use utility::*;
+mod price;
+pub use price::*;

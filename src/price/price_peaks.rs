@@ -1,5 +1,5 @@
 /// # Price Peaks
-/// A price peak is a price on a chart that has sloping sides. The highest price between 2 slopes (up slope and down slope) is considered the peak.
+/// A price peak is a price on a chart that has a slope up followed by a slope down. The highest price between 2 slopes is considered the peak.
 /// Given a slice of data and the slope tolerance, a price peak can be found like so
 ///
 /// ```no_run
