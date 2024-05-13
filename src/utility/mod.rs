@@ -13,16 +13,18 @@ pub fn find_price_peaks(data: &[i32], slope: usize) -> Option<Vec<i32>> {
     let mut peaks = Vec::new();
 
     for (i, peak) in data[slope..].iter().enumerate() {
-        if (slope * 2) + (i + 1) > data.len() {
+        let comparison_length = (slope * 2) + (i + 1);
+
+        if comparison_length > data.len() {
             break;
         }
 
-        let left_slope_less = data[i..slope + i].iter().all(|&x| x < *peak);
-        let right_slope_less = data[i + slope + 1..(slope * 2) + (i + 1)]
-            .iter()
-            .all(|&x| x < *peak);
+        // Take entire slice then remove the peak number
+        let mut combined_slopes = data[i..comparison_length].to_vec();
+        combined_slopes.swap_remove(slope);
 
-        if left_slope_less && right_slope_less {
+        // Peak should be higher than numbers in slice
+        if combined_slopes.iter().all(|x| x < peak) {
             peaks.push(*peak);
         }
     }
