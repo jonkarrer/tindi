@@ -4,12 +4,12 @@
 ///
 /// ```no_run
 /// fn test_find_price_valleys() {
-///     let valleys = find_price_valleys(&[5, 6, 8, 9, 6, 8, 7, 12], 3); // Some([9])
-///     assert!(valleys.is_some_and(|x| x[0] == 9));
+///     let valleys = find_price_valleys(&[5.0, 6.0, 8.0, 9.0, 6.0, 8.0, 7.0, 12.0], 3); // Some([9])
+///     assert!(valleys.is_some_and(|x| x[0] == 9.0));
 /// }
 /// ```
 
-pub fn find_price_valleys(data: &[i32], slope: usize) -> Option<Vec<i32>> {
+pub fn find_price_valleys(data: &[f32], slope: usize) -> Option<Vec<f32>> {
     let mut valleys = Vec::new();
 
     for (i, valley) in data[slope..].iter().enumerate() {
@@ -42,17 +42,20 @@ mod tests {
 
     #[test]
     fn test_find_price_valleys_three() {
-        let valleys = find_price_valleys(&[5, 6, 8, 1, 6, 8, 7, 12], 3);
+        let valleys = find_price_valleys(&[5.0, 6.0, 8.0, 1.0, 6.0, 8.0, 7.0, 12.0], 3);
         dbg!(&valleys);
-        assert!(valleys.is_some_and(|x| x[0] == 1));
+        assert!(valleys.is_some_and(|x| x[0] == 1.0));
     }
 
     #[test]
     fn test_find_price_valleys_five() {
         let valleys = find_price_valleys(
-            &[5, 6, 8, 9, 6, 8, 7, 1, 5, 8, 9, 10, 5, 2, 4, 2, 4, 5, 20],
+            &[
+                5.0, 6.0, 8.0, 9.0, 6.0, 8.0, 7.0, 1.0, 5.0, 8.0, 9.0, 10.0, 5.0, 0.0, 4.0, 2.0,
+                4.0, 5.0, 20.0,
+            ],
             5,
         );
-        assert!(valleys.is_some_and(|x| x[0] == 1));
+        assert!(valleys.is_some_and(|x| x[0] == 1.0));
     }
 }

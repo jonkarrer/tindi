@@ -4,12 +4,12 @@
 ///
 /// ```no_run
 /// fn test_find_price_peaks_() {
-///     let peaks = find_price_peaks(&[5, 6, 8, 9, 6, 8, 7, 12], 3); // Some([9])
-///     assert!(peaks.is_some_and(|x| x[0] == 9));
+///     let peaks = find_price_peaks(&[5.0, 6.0, 8.0, 9.0, 6.0, 8.0, 7.0, 12.0], 3); // Some([9])
+///     assert!(peaks.is_some_and(|x| x[0] == 9.0));
 /// }
 /// ```
 
-pub fn find_price_peaks(data: &[i32], slope: usize) -> Option<Vec<i32>> {
+pub fn find_price_peaks(data: &[f32], slope: usize) -> Option<Vec<f32>> {
     let mut peaks = Vec::new();
 
     for (i, peak) in data[slope..].iter().enumerate() {
@@ -42,16 +42,19 @@ mod tests {
 
     #[test]
     fn test_find_price_peaks_three() {
-        let peaks = find_price_peaks(&[5, 6, 8, 9, 6, 8, 7, 12], 3);
-        assert!(peaks.is_some_and(|x| x[0] == 9));
+        let peaks = find_price_peaks(&[5.0, 6.0, 8.0, 9.0, 6.0, 8.0, 7.0, 12.0], 3);
+        assert!(peaks.is_some_and(|x| x[0] == 9.0));
     }
 
     #[test]
     fn test_find_price_peaks_five() {
         let peaks = find_price_peaks(
-            &[5, 6, 8, 9, 6, 8, 7, 12, 5, 8, 9, 10, 5, 0, 4, 2, 4, 5, 20],
+            &[
+                5.0, 6.0, 8.0, 9.0, 6.0, 8.0, 7.0, 12.0, 5.0, 8.0, 9.0, 10.0, 5.0, 0.0, 4.0, 2.0,
+                4.0, 5.0, 20.0,
+            ],
             5,
         );
-        assert!(peaks.is_some_and(|x| x[0] == 12));
+        assert!(peaks.is_some_and(|x| x[0] == 12.0));
     }
 }
