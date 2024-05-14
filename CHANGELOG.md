@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.1] - 2024-05-14
+
+### 🚀 Features
+
+- Price peak and valley algo
+
+### ⚙️ Miscellaneous Tasks
+
+- Bump version and changelog update
+
 ## [0.6.0] - 2024-05-10
 
 ### 🚜 Refactor
