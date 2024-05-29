@@ -3,10 +3,8 @@
 /// Given a slice of data and the slope tolerance, a price valley can be found like so
 ///
 /// ```no_run
-/// fn test_find_price_valleys() {
-///     let valleys = find_price_valleys(&[5.0, 6.0, 8.0, 9.0, 6.0, 8.0, 7.0, 12.0], 3); // Some([9])
-///     assert!(valleys.is_some_and(|x| x[0] == 9.0));
-/// }
+/// let valleys = find_price_valleys(&[5.0, 6.0, 8.0, 9.0, 6.0, 8.0, 7.0, 12.0], 3); // Some([9])
+/// assert!(valleys.is_some_and(|x| x[0] == 9.0));
 /// ```
 
 pub fn find_price_valleys(data: &[f32], slope: usize) -> Option<Vec<f32>> {

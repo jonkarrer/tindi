@@ -9,3 +9,6 @@ pub use trend::*;
 
 mod price;
 pub use price::*;
+
+mod graph;
+pub use graph::*;

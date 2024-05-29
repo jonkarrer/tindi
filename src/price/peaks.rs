@@ -3,10 +3,8 @@
 /// Given a slice of data and the slope tolerance, a price peak can be found like so
 ///
 /// ```no_run
-/// fn test_find_price_peaks_() {
-///     let peaks = find_price_peaks(&[5.0, 6.0, 8.0, 9.0, 6.0, 8.0, 7.0, 12.0], 3); // Some([9])
-///     assert!(peaks.is_some_and(|x| x[0] == 9.0));
-/// }
+/// let peaks = find_price_peaks(&[5.0, 6.0, 8.0, 9.0, 6.0, 8.0, 7.0, 12.0], 3); // Some([9])
+/// assert!(peaks.is_some_and(|x| x[0] == 9.0));
 /// ```
 
 pub fn find_price_peaks(data: &[f32], slope: usize) -> Option<Vec<f32>> {
