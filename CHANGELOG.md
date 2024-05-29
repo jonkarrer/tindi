@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.0] - 2024-05-29
+
+### ⚙️ Miscellaneous Tasks
+
+- Bump version
+
+### Add
+
+- Slope formula
+- Angle of slope function
+
 ## [0.6.1] - 2024-05-14
 
 ### 🚀 Features
