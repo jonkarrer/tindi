@@ -1,5 +1,15 @@
 use std::io::{Error, ErrorKind};
 
+/// # Rate of Change
+/// A technical indicator that is used to identify the trend of a stock.
+/// It is composed of a percentage change between the current price and the price n periods ago.
+///
+/// ## Example
+/// ```no_run
+/// let roc = rate_of_change(&[40.0, 43.0, 44.0, 50.0], 4).unwrap();
+/// assert_eq!(roc, 25.0);
+/// ```
+
 pub fn rate_of_change(data: &[f32], period: usize) -> Result<f32, Error> {
     if data.len() < period {
         return Err(Error::new(

@@ -1,4 +1,7 @@
-///Calculate the angle of the slope between two price points in degrees. (x1, y1) and (x2, y2).
+use super::{slope, Point};
+
+/// # Angle
+/// Calculate the angle of the slope between two price points in degrees. (x1, y1) and (x2, y2).
 /// Use the intervals of an array for X, and price for Y.
 ///
 /// ```no_run
@@ -7,7 +10,6 @@
 /// let angle = angle_in_degrees(point1, point2);
 /// assert_eq!(angle, 45.0);
 /// ```
-use super::{slope, Point};
 
 pub fn angle_in_degrees(start_point: Point, end_point: Point) -> f32 {
     let m = slope(start_point, end_point);
