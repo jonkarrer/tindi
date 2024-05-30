@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.2] - 2024-05-30
+
+### 🐛 Bug Fixes
+
+- Make field public on Point struct
+
 ## [0.7.1] - 2024-05-30
 
 ### ⚙️ Miscellaneous Tasks
