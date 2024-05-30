@@ -1,3 +1,19 @@
+/// # Standard Deviation
+/// The standard deviation is a measure of how spread out numbers are.
+/// It is calculated as the square root of the average of the squared differences
+/// from the mean.
+///
+/// ## Example
+/// ```no_run
+/// let data = vec![
+///     53.73, 53.87, 53.85, 53.88, 54.08, 54.14, 54.5, 54.3, 54.4, 54.16,
+/// ];
+/// let result = standard_deviation(&data);
+/// let expect = 0.257227;
+///
+/// assert_eq!(result, expect);
+/// ```
+
 pub fn standard_deviation(data: &[f32]) -> f32 {
     let length = data.len() as f32;
 

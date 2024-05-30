@@ -4,4 +4,4 @@ pub use slope::*;
 mod angle;
 pub use angle::*;
 
-pub struct Point(f32, f32);
+pub struct Point(pub f32, pub f32);
