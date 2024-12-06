@@ -1,5 +1,3 @@
-use std::io::{Error, ErrorKind};
-
 /// # Exponential Moving Average
 /// An exponential moving average (EMA) is a type of moving average
 /// that places a greater weight and significance on recent data points than
@@ -18,14 +16,8 @@ use std::io::{Error, ErrorKind};
 /// assert_eq!(result, expected);
 /// ```
 
-pub fn exponential_moving_average(data: &[f32], period: usize) -> Result<f32, Error> {
-    if data.len() < period {
-        return Err(Error::new(
-            ErrorKind::Other,
-            format!("EMA: Given {}, Need {}", data.len(), period,),
-        ));
-    }
-
+pub fn exponential_moving_average(data: &[f32]) -> f32 {
+    let period = data.len();
     let mut ema = 0.0;
     let alpha = 2.0 / (period as f32 + 1.0);
 
@@ -36,11 +28,11 @@ pub fn exponential_moving_average(data: &[f32], period: usize) -> Result<f32, Er
     ema /= period as f32;
 
     // EMA calculation
-    for i in period..data.len() {
-        ema = data[i] * alpha + ema * (1.0 - alpha);
+    for price in data {
+        ema = price * alpha + ema * (1.0 - alpha);
     }
 
-    Ok(ema)
+    ema
 }
 
 #[cfg(test)]
@@ -55,24 +47,9 @@ mod tests {
             36.25, 36.59, 36.49, 36.39, 35.66, 35.99, 32.93, 30.98, 30.99, 32.15, 31.99, 32.34,
         ];
 
-        let result = exponential_moving_average(&data, 12).unwrap();
+        let result = exponential_moving_average(&data);
         let expected = 33.297977;
         dbg!(&result);
         assert_eq!(result, expected);
-    }
-
-    #[test]
-    fn test_ema_error() {
-        let data: Vec<f32> = vec![
-            10.0, 12.0, 13.0, 15.0, 16.0, 18.0, 17.0, 16.0, 19.0, 20.0, 22.0, 23.0, 25.0, 24.0,
-            22.0, 20.0, 18.0, 19.0, 21.0, 23.0, 24.0, 26.0, 27.0, 25.0, 23.0, 22.0, 20.0, 18.0,
-            19.0, 21.0, 23.0,
-        ];
-
-        let res = exponential_moving_average(&data, 41);
-
-        dbg!(&res);
-
-        assert!(res.is_err());
     }
 }

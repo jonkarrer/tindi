@@ -36,7 +36,7 @@ pub struct BollingerBands {
 }
 
 impl BollingerBands {
-    pub fn new(data: &[f32], period: usize) -> Result<Self, Error> {
+    pub fn new(data: &[f32], period: usize, std_dev_multiplier: f32) -> Result<Self, Error> {
         if data.len() < period {
             return Err(Error::new(
                 ErrorKind::Other,
@@ -49,7 +49,7 @@ impl BollingerBands {
         let mean = simple_moving_average(&prices);
         let std_dev = standard_deviation(&prices);
 
-        let k = std_dev * 2.0;
+        let k = std_dev * std_dev_multiplier;
         let top_band = mean + k;
         let bottom_band = mean - k;
 
@@ -83,7 +83,7 @@ mod tests {
             33.91, 35.87, 35.37, 36.11, 35.93, 34.53, 33.70, 33.95, 34.20, 35.38, 36.12, 35.35,
             36.25, 36.59, 36.49, 36.39, 35.66, 35.99, 32.93, 30.98, 30.99, 32.15, 31.99, 32.34,
         ];
-        let result = BollingerBands::new(&data, 20).unwrap();
+        let result = BollingerBands::new(&data, 20, 2.0).unwrap();
         dbg!(&result);
         let expect = BollingerBands {
             top_band: 38.211624,
@@ -98,7 +98,7 @@ mod tests {
     fn test_ema_error() {
         let data: Vec<f32> = vec![10.0, 12.0, 13.0];
 
-        let res = BollingerBands::new(&data, 10);
+        let res = BollingerBands::new(&data, 10, 2.0);
         assert!(res.is_err())
     }
 }

@@ -31,9 +31,9 @@ pub fn exponential_moving_average_trend(
     }
 
     let short_period =
-        exponential_moving_average(&data[data.len() - (short_period * 2)..], short_period)?;
+        exponential_moving_average(&data[data.len() - (short_period * 2)..short_period]);
     let long_period =
-        exponential_moving_average(&data[data.len() - (long_period * 2)..], long_period)?;
+        exponential_moving_average(&data[data.len() - (long_period * 2)..long_period]);
 
     if long_period < short_period {
         return Ok(Trend::Bullish);

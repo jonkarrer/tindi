@@ -23,8 +23,8 @@ mod tests {
 
     #[test]
     fn test_angle() {
-        let point1 = Point(1.0, 2.0);
-        let point2 = Point(3.0, 4.0);
+        let point1 = Point(7.0, 40.98);
+        let point2 = Point(19.0, 42.67);
         let angle = angle_in_degrees(point1, point2);
         assert_eq!(angle, 45.0);
     }

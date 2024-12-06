@@ -3,35 +3,21 @@
 /// Given a slice of data and the slope tolerance, a price peak can be found like so
 ///
 /// ```no_run
-/// let peaks = find_price_peaks(&[5.0, 6.0, 8.0, 9.0, 6.0, 8.0, 7.0, 12.0], 3); // Some([9])
-/// assert!(peaks.is_some_and(|x| x[0] == 9.0));
+/// let peaks = find_price_peaks(&[5.0, 6.0, 8.0, 9.0, 6.0, 8.0, 7.0]); // Some([9])
+/// assert!(peaks.is_some_and(|x| x == 9.0));
 /// ```
 
-pub fn find_price_peaks(data: &[f32], slope: usize) -> Option<Vec<f32>> {
-    let mut peaks = Vec::new();
+pub fn find_price_peak(prices: &[f32]) -> Option<f32> {
+    let slope_size = prices.len() / 2;
+    let middle_price = prices[slope_size];
 
-    for (i, peak) in data[slope..].iter().enumerate() {
-        let comparison_length = (slope * 2) + (i + 1);
-
-        if comparison_length > data.len() {
-            break;
-        }
-
-        // Take entire slice then remove the peak number
-        let mut combined_slopes = data[i..comparison_length].to_vec();
-        combined_slopes.swap_remove(slope);
-
-        // Peak should be higher than numbers in slice
-        if combined_slopes.iter().all(|x| x < peak) {
-            peaks.push(*peak);
+    for p in prices {
+        if p > &middle_price {
+            return None;
         }
     }
 
-    if peaks.len() > 0 {
-        return Some(peaks);
-    }
-
-    None
+    Some(middle_price)
 }
 
 #[cfg(test)]
@@ -39,20 +25,8 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_find_price_peaks_three() {
-        let peaks = find_price_peaks(&[5.0, 6.0, 8.0, 9.0, 6.0, 8.0, 7.0, 12.0], 3);
-        assert!(peaks.is_some_and(|x| x[0] == 9.0));
-    }
-
-    #[test]
-    fn test_find_price_peaks_five() {
-        let peaks = find_price_peaks(
-            &[
-                5.0, 6.0, 8.0, 9.0, 6.0, 8.0, 7.0, 12.0, 5.0, 8.0, 9.0, 10.0, 5.0, 0.0, 4.0, 2.0,
-                4.0, 5.0, 20.0,
-            ],
-            5,
-        );
-        assert!(peaks.is_some_and(|x| x[0] == 12.0));
+    fn test_find_price_peak() {
+        let peaks = find_price_peak(&[5.0, 6.0, 8.0, 9.0, 6.0, 8.0, 7.0]);
+        assert!(peaks.is_some_and(|x| x == 9.0));
     }
 }

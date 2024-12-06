@@ -61,8 +61,8 @@ impl MovingAverageConvergenceDivergence {
             let target_data = &data[0..data.len() - i];
 
             // MACD line = 12-period EMA - 26-period EMA
-            let short_period = exponential_moving_average(&target_data, 12)?;
-            let long_period = exponential_moving_average(&target_data, 26)?;
+            let short_period = exponential_moving_average(&target_data[0..12]);
+            let long_period = exponential_moving_average(&target_data[0..26]);
             let macd = short_period - long_period;
 
             // Place value at the start of the vec on each loop. This ensures
@@ -70,7 +70,7 @@ impl MovingAverageConvergenceDivergence {
             baseline.insert(0, macd);
         }
 
-        let signal = exponential_moving_average(&baseline, 9)?;
+        let signal = exponential_moving_average(&baseline[0..9]);
         let hist = baseline.last().unwrap() - signal;
         Ok(Self {
             baseline,
