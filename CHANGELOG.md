@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.8.0] - 2024-12-06
+
+### 🚀 Features
+
+- Pass in custom std dev multiplier to bollinger bands
+
 ## [0.7.2] - 2024-05-30
 
 ### 🐛 Bug Fixes
